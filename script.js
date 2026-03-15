@@ -1,3 +1,6 @@
+const SCREEN = document.querySelector('.screen');
+const KEYS = document.querySelectorAll('.key');
+
 let number1 = '';
 let number2 = '';
 let operator;
@@ -29,3 +32,15 @@ function operate(operator, number1, number2) {
         subtract(operator, number1, number2);
     }
 }
+
+KEYS.forEach(key => {
+    key.addEventListener('click', (e) => {
+        
+        // Update number variable
+        number1 += key.textContent;
+
+        // Update screen
+        SCREEN.textContent = number1
+
+    })
+})

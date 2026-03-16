@@ -5,6 +5,8 @@ let number1 = '';
 let number2 = '';
 let operator;
 
+let total;
+
 function add(a, b) { 
     return a + b;
 }

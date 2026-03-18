@@ -47,6 +47,7 @@ operatorElements.forEach(op => {
         currentNum = '';
 
         // update screen__before textContent
-        screenBeforeElem.textContent = prevNum + " " + operator
+        screenBeforeElem.textContent = prevNum
+        if (operator !== '=') screenBeforeElem.textContent += ' ' + operator;
     })
 })

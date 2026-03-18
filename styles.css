@@ -29,7 +29,7 @@ button {
 button:hover {
     transition: cubic-bezier(0.25, 0.46, 0.45, 0.94)s;
     background-color: rgb(198, 255, 172);
-    border: 2px rgb(243, 243, 243) solid;
+    /* border: 2px rgb(243, 243, 243) solid; */
 
     transform: scale(1.03, 1.03);
 }

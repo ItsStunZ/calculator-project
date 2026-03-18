@@ -1,48 +1,52 @@
-const SCREEN = document.querySelector('.screen');
-const KEYS = document.querySelectorAll('.key');
+const keyElements = document.querySelectorAll('.key');
+const operatorElements = document.querySelectorAll('.operator');
+const screenCurrentElement = document.querySelector('.screen__current');
+const screenBeforeElem = document.querySelector('.screen__before');
 
-let number1 = '';
-let number2 = '';
-let operator;
+let prevNum = '';
+let currentNum = '';
+let operator = '';
 
-let total;
 
-function add(a, b) { 
-    return a + b;
-}
+function calculate() {
+    const firstNum = Number(prevNum);
+    const secondNum = Number(currentNum);
 
-function subtract(a, b) {
-    return a - b;
-}
-
-function multiply(a, b) {
-    return a * b;
-}
-
-function divide(a, b) {
-    return a / b;
-}
-
-function operate(operator, number1, number2) {
     if (operator === '+') {
-        add(operator, number1, number2);
+        return firstNum + secondNum;
     } else if (operator === '-') {
-        subtract(operator, number1, number2);
+        return firstNum - secondNum;
     } else if (operator === 'x') {
-        subtract(operator, number1, number2);
-    } else if (operator === '%') {
-        subtract(operator, number1, number2);
+        return firstNum * secondNum;
+    } else if (operator === '/') {
+        return firstNum / secondNum;
     }
 }
 
-KEYS.forEach(key => {
+keyElements.forEach(key => {
     key.addEventListener('click', (e) => {
-        
-        // Update number variable
-        number1 += key.textContent;
+        // prevent text going off and making parent elem bigger
+        if (currentNum.length < 20) {
+            currentNum += e.target.textContent;
+            screenCurrentElement.textContent = currentNum;
+        }
+    })
+})
 
-        // Update screen
-        SCREEN.textContent = number1
+operatorElements.forEach(op => {
+    op.addEventListener('click', (e) => {
+        // calculate prev and current if both exist
+        if (prevNum !== '') {
+            currentNum = calculate();
+            screenCurrentElement.textContent = currentNum
+        }
 
+
+        operator = op.textContent;
+        prevNum = currentNum;
+        currentNum = '';
+
+        // update screen__before textContent
+        screenBeforeElem.textContent = prevNum + " " + operator
     })
 })
